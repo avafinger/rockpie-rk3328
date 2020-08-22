@@ -29,7 +29,7 @@ Testing mainline **kernel 5.9.0-rc1**, current status:
 * Eth1 - ok
 * Wifi (5 GHz) - ok
 * BT - ok
-* eMMC - need more tests
+* eMMC - ok
 * hdmi - need more tests (?)
 * sound (?)
 
@@ -143,6 +143,11 @@ Testing mainline **kernel 5.9.0-rc1**, current status:
 **1.5 Ghz**
 ![RockPiE Limits](https://github.com/avafinger/rockpie-rk3328/raw/master/limits.png)
 
+## eMMC
+
+eMMC is configured and works fine.
+
+![eMMC](https://github.com/avafinger/rockpie-rk3328/raw/master/emmc.png)
 
 
 ## Credits
