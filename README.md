@@ -149,7 +149,33 @@ eMMC is configured and works fine.
 
 ![eMMC](https://github.com/avafinger/rockpie-rk3328/raw/master/emmc.png)
 
+## Monitoring your RockPi E health with Htop 2.2.2-4
+
+Latest htop 2.2.2-4 comes with a full set of tools to monitor your Wlan0, Eth0, Eth1, Cpu Frequency, Cpu Temperature in real-time from ssh section.
+Run:
+
+        sudo htop
+	
+
+![wlan0](https://github.com/avafinger/rockpie-rk3328/raw/master/wlan0_emmc_sdcard.png
+
+## Installing Ubuntu 20.04 LTS on eMMC (instructions)
+
+**Requirements**
+
+* sd card (8GB or higher)
+* eMMC (8GB or higher)
+* Ethernet connection or Wifi or debug ttl uart
+
+**Steps WIP**
+
+* Flash the OS img file using Win32DiskImager or Etcher to a SD card
+* If you have eMMC, plugin the eMMC
+* Boot RockPi E with the sd CARD inserted in the slot
+
+
+
 
 ## Credits
 
-I would like to thanks Tom Cubie from Radxa for providing this RockPi E (Eng) sample
+I would like to thank Tom Cubie from Radxa for providing this RockPi E (Eng) sample
