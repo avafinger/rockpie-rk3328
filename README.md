@@ -157,7 +157,7 @@ Run:
         sudo htop
 	
 
-![wlan0](https://github.com/avafinger/rockpie-rk3328/raw/master/wlan0_emmc_sdcard.png
+![wlan0](https://github.com/avafinger/rockpie-rk3328/raw/master/wlan0_emmc_sdcard.png)
 
 ## Installing Ubuntu 20.04 LTS on eMMC (instructions)
 
