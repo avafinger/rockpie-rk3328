@@ -34,10 +34,10 @@ Testing mainline **kernel 5.9.0-rc1**, current status:
 * BT - ok
 * eMMC - ok
 * hdmi - ok (for debugging)
-* sound - (wip)
-* DVFS
+* sound - JACK output and HDMI output (ok)
+* DVFS - ok
 * CPU thermal trhottling at 85ºC (a bit late and slow)
-* USB2
+* USB2 - ok
 * USB3 (?)
 
 ## Benchmarks
@@ -161,6 +161,42 @@ eMMC is configured and works fine.
 Mainline kernel 5.9.0-rc2 was built with gcc 9.3 onboard to pass the stability test.
 
 ![Htop](https://github.com/avafinger/rockpie-rk3328/raw/master/kernel_5.9.0-rc2.png)
+
+* Sound (analog and hdmi)
+
+**JACK**
+
+	ubuntu@rockpie:~$ play SoundHelix-Song-1.mp3 
+
+	SoundHelix-Song-1.mp3:
+
+	 File Size: 8.95M     Bit Rate: 192k
+	  Encoding: MPEG audio    Info: 2009
+	  Channels: 2 @ 16-bit   
+	Samplerate: 44100Hz      
+	Replaygain: off         Artist: SoundHelix
+	  Duration: 00:06:12.73  
+
+	In:6.50% 00:00:24.24 [00:05:48.48] Out:1.07M [======|======] Hd:0.5 Clip:0    
+	Aborted.
+
+**HDMI**
+
+	ubuntu@rockpie:~$ AUDIODEV=hw:0,0 play SoundHelix-Song-1.mp3 
+	play WARN alsa: can't encode 0-bit Unknown or not applicable
+
+	SoundHelix-Song-1.mp3:
+
+	 File Size: 8.95M     Bit Rate: 192k
+	  Encoding: MPEG audio    Info: 2009
+	  Channels: 2 @ 16-bit   
+	Samplerate: 44100Hz      
+	Replaygain: off         Artist: SoundHelix
+	  Duration: 00:06:12.73  
+
+	In:3.91% 00:00:14.58 [00:05:58.14] Out:643k  [  -===|==    ] Hd:0.8 Clip:0    
+	Aborted.
+
 
 
 ## Boot log (booting from eMMC)
