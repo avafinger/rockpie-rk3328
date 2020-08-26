@@ -1,7 +1,7 @@
 # RockPi E
 RockPi E Eng. sample - model D8W2
 
-This Engineering model has a micro HDMI for debugging purpose, but would be nice to have it in the final product or another version.
+This model has a micro HDMI for debugging purpose, but would be nice to have it in the final product or another version.
 
 
 * u-boot
@@ -710,8 +710,20 @@ Run:
 **Steps (WIP)**
 
 * Flash the OS img file using Win32DiskImager or Etcher to a SD card
+  Use 7zip to unzip the img file
 * If you have eMMC, plugin the eMMC
-* Boot RockPi E with the sd CARD inserted in the slot
+* Boot RockPi E with the SD CARD inserted into the slot
+  You will see the green led blinking (heartbeat)
+  login: ubuntu
+  paswd: ubuntu
+* run the eMMC install script:
+	
+	  cd emmc
+	  sudo ./flash_focal_mainline.sh /dev/mmcblk1
+* Wait till finished and then run:
+
+	  sync
+	  sudo reboot
 
 
 ## Issues
