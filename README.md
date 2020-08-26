@@ -5,7 +5,7 @@ This model has a micro HDMI for debugging purpose, but would be nice to have it 
 
 Releases:
 
-* [v1.0 - Kernel 5.9.0 RC2](#v097---installing-ubuntu-2004-lts-on-emmc-instructions)
+* [v1.0 - Kernel 5.9.0 RC2](#installing-ubuntu-2004-lts-on-emmc-instructions)
 
 
 * u-boot
