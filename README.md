@@ -3,6 +3,10 @@ RockPi E Eng. sample - model D8W2
 
 This model has a micro HDMI for debugging purpose, but would be nice to have it in the final product or another version.
 
+Releases:
+
+* [v1.0 - Kernel 5.9.0 RC2](#v097---installing-ubuntu-2004-lts-on-emmc-instructions)
+
 
 * u-boot
 * Ubuntu 20.04 LTS
@@ -700,6 +704,8 @@ Run:
 ![wlan0](https://github.com/avafinger/rockpie-rk3328/raw/master/wlan0_emmc_sdcard.png)
 
 ## Installing Ubuntu 20.04 LTS on eMMC (instructions)
+
+[v1.0 - Kernel 5.9.0 RC2](https://github.com/avafinger/rockpie-rk3328/releases/tag/v1.0)
 
 **Requirements**
 
