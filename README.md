@@ -6,27 +6,41 @@ This model has a micro HDMI for debugging purpose, but would be nice to have it 
 Releases:
 
 * [v1.0 - Kernel 5.9.0 RC2](#installing-ubuntu-2004-lts-on-emmc-instructions)
-
-
-* u-boot
+* [u-boot - mainline](#u-boot)
 * Ubuntu 20.04 LTS
 
 ## U-boot
 
-Bootloader based on Android.
-* Burn SDCARD
+Uboot Build instructions.
 
-      cd u-boot
-      sudo dd if=./idbloader.img of=/dev/sdX seek=64 conv=notrunc
-      sync
-      sudo dd if=./trust.img of=/dev/sdX seek=24576 conv=notrunc
-      sync
-      sudo dd if=./uboot.img of=/dev/sdX seek=16384 conv=notrunc
-      sync
+Assuming you want to build mainline u-boot on the **RockPi E** instead of CROSS COMPILING it:
 
-where X is the device letter (b,c...)
+* Install dependencies
 
-* U-boot (shutdown issue, reboot works)
+                sudo apt-get install device-tree-compiler python3-dev python3-distutils swig
+
+
+* Build
+
+		mkdir u-boot
+		cd u-boot/
+		git clone https://github.com/ARM-software/arm-trusted-firmware 
+		cd arm-trusted-firmware/
+		make PLAT=rk3328 DEBUG=0 bl31
+		cd ..
+		export BL31=$PWD/arm-trusted-firmware/build/rk3328/release/bl31/bl31.elf
+		make -C u-boot distclean
+		make -C u-boot rock-pi-e-rk3328_defconfig
+		make -C u-boot 
+
+* Install u-boot (eMMC)
+
+		sudo dd if=u-boot/idbloader.img of=/dev/mmcblk1 seek=64
+		sudo dd if=u-boot/u-boot.itb of=/dev/mmcblk1 seek=16384
+		sync
+		sudo reboot
+
+* Pre-built
 
 ## Kernel 5.9.0-rc1
 
