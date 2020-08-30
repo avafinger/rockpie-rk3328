@@ -29,6 +29,7 @@ Assuming you want to build mainline u-boot on the **RockPi E** instead of CROSS 
 		make PLAT=rk3328 DEBUG=0 bl31
 		cd ..
 		export BL31=$PWD/arm-trusted-firmware/build/rk3328/release/bl31/bl31.elf
+		git clone https://gitlab.denx.de/u-boot/u-boot.git
 		make -C u-boot distclean
 		make -C u-boot rock-pi-e-rk3328_defconfig
 		make -C u-boot 
@@ -41,6 +42,9 @@ Assuming you want to build mainline u-boot on the **RockPi E** instead of CROSS 
 		sudo reboot
 
 * Pre-built
+
+		https://github.com/avafinger/rockpie-rk3328/releases/tag/v1.0.1
+
 
 ## Kernel 5.9.0-rc1
 
