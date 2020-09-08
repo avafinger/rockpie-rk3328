@@ -151,6 +151,10 @@ Testing mainline **kernel 5.9.0-rc1**, current status:
 Realtek rtl8821cu with BT 4.2 are capable of working consistently, streaming video while using the Wifi.
 Streaming audio from a Phone to the RockpiE works really nice. In the example we are going to make RockpiE output the sound to analog jack.
 
+* Install Bluetooth
+
+		apt-get install bluez bluez-tools bluetooth pulseaudio-module-bluetooth
+
 * Find our phone
 
 		hcitool scan
