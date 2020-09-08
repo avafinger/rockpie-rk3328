@@ -146,6 +146,184 @@ Testing mainline **kernel 5.9.0-rc1**, current status:
 			LMP Version: 4.2 (0x8)  Subversion: 0xa99e
 			Manufacturer: Realtek Semiconductor Corporation (93)
 
+## Bluetooth for audio streaming with RockPi E
+
+Realtek rtl8821cu with BT 4.2 are capable of working consistently, streaming video while using the Wifi.
+Streaming audio from a Phone to the RockpiE works really nice. In the example we are going to make RockpiE output the sound to analog jack.
+
+* Find our phone
+
+		hcitool scan
+		Scanning ...
+			00:17:CA:F7:38:18	Haier HW-W910
+
+
+* Make our RockPi E visible to our Phone
+
+		ubuntu@rockpie:~$ bluetoothctl discoverable on
+		Changing discoverable on succeeded
+		ubuntu@rockpie:~$ hciconfig -a
+		hci0:	Type: Primary  Bus: USB
+			BD Address: 7C:A7:B0:21:21:35  ACL MTU: 1021:8  SCO MTU: 255:12
+			UP RUNNING PSCAN ISCAN 
+			RX bytes:311518993 acl:532158 sco:0 events:549 errors:0
+			TX bytes:16671 acl:412 sco:0 commands:94 errors:0
+			Features: 0xff 0xff 0xff 0xfe 0xdb 0xfd 0x7b 0x87
+			Packet type: DM1 DM3 DM5 DH1 DH3 DH5 HV1 HV2 HV3 
+			Link policy: RSWITCH HOLD SNIFF PARK 
+			Link mode: SLAVE ACCEPT 
+			Name: 'rockpie'
+			Class: 0x0c0000
+			Service Classes: Rendering, Capturing
+			Device Class: Miscellaneous, 
+			HCI Version: 4.2 (0x8)  Revision: 0x826c
+			LMP Version: 4.2 (0x8)  Subversion: 0xa99e
+			Manufacturer: Realtek Semiconductor Corporation (93)
+
+* Make sure our RockPi E is running pulse and has audio sink
+
+		ubuntu@rockpie:~$ pactl info
+		Server String: /run/user/1000/pulse/native
+		Library Protocol Version: 33
+		Server Protocol Version: 33
+		Is Local: yes
+		Client Index: 6
+		Tile Size: 65472
+		User Name: ubuntu
+		Host Name: rockpie
+		Server Name: pulseaudio
+		Server Version: 13.99.1
+		Default Sample Specification: s16le 2ch 44100Hz
+		Default Channel Map: front-left,front-right
+		Default Sink: alsa_output.default
+		Default Source: bluez_source.00_17_CA_F7_38_18.a2dp_source
+		Cookie: fb4a:9eb4
+
+* From the Phone, scan and find RockPi E
+
+* pair as usual and connect
+
+		ubuntu@rockpie:~$ bluetoothctl
+		Agent registered
+		[CHG] Controller 7C:A7:B0:21:21:35 Pairable: yes
+		[bluetooth]# discoverable on
+		Changing discoverable on succeeded
+		[CHG] Controller 7C:A7:B0:21:21:35 Discoverable: yes
+		[bluetooth]# pairable on
+		Changing pairable on succeeded
+		[bluetooth]# agent on
+		Agent is already registered
+		[bluetooth]# default-agent
+		Default agent request successful
+		[bluetooth]# advertise on
+		[CHG] Controller 7C:A7:B0:21:21:35 SupportedInstances: 0x04
+		[CHG] Controller 7C:A7:B0:21:21:35 ActiveInstances: 0x01
+		Advertising object registered
+		Tx Power: off
+		Name: off
+		Apperance: off
+		Discoverable: off
+		[bluetooth]# discoverable on
+		Changing discoverable on succeeded
+		[CHG] Controller 7C:A7:B0:21:21:35 Discoverable: yes
+		[bluetooth]# advertise on
+		Advertisement is already registered
+		[bluetooth]# discoverable on
+		Changing discoverable on succeeded
+		[bluetooth]# agent on
+		Agent is already registered
+		[bluetooth]# default-agent
+		Default agent request successful
+		[CHG] Controller 7C:A7:B0:21:21:35 Discoverable: no
+		[bluetooth]# default-agent
+		Default agent request successful
+		[bluetooth]# discoverable on
+		Changing discoverable on succeeded
+		[CHG] Controller 7C:A7:B0:21:21:35 Discoverable: yes
+		[CHG] Controller 7C:A7:B0:21:21:35 Discoverable: no
+		[NEW] Device 00:17:CA:F7:38:18 Haier HW-W910
+		Request confirmation
+		[agent] Confirm passkey 756666 (yes/no): yes
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001108-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 Modalias: usb:v000Ap0000d0000
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001105-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001108-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000110a-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000110c-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001112-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001116-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000111f-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000112f-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001132-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001200-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001800-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001801-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 ServicesResolved: yes
+		[CHG] Device 00:17:CA:F7:38:18 Paired: yes
+		Authorize service
+		[agent] Authorize service 00001108-0000-1000-8000-00805f9b34fb (yes/no): yes
+		Authorize service
+		[agent] Authorize service 0000110d-0000-1000-8000-00805f9b34fb (yes/no): yes
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001105-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001108-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000110a-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000110c-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000110d-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001112-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001116-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000111f-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000112f-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001132-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001200-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001800-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001801-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001105-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001108-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000110a-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000110c-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000110d-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000110e-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001112-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001116-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000111f-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 0000112f-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001132-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001200-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001800-0000-1000-8000-00805f9b34fb
+		[CHG] Device 00:17:CA:F7:38:18 UUIDs: 00001801-0000-1000-8000-00805f9b34fb
+		Authorize service
+		[agent] Authorize service 0000110e-0000-1000-8000-00805f9b34fb (yes/no): yes
+		[Haier HW-W910]# info
+		Device 00:17:CA:F7:38:18 (public)
+			Name: Haier HW-W910
+			Alias: Haier HW-W910
+			Class: 0x005a020c
+			Icon: phone
+			Paired: yes
+			Trusted: no
+			Blocked: no
+			Connected: yes
+			LegacyPairing: no
+			UUID: OBEX Object Push          (00001105-0000-1000-8000-00805f9b34fb)
+			UUID: Headset                   (00001108-0000-1000-8000-00805f9b34fb)
+			UUID: Audio Source              (0000110a-0000-1000-8000-00805f9b34fb)
+			UUID: A/V Remote Control Target (0000110c-0000-1000-8000-00805f9b34fb)
+			UUID: Advanced Audio Distribu.. (0000110d-0000-1000-8000-00805f9b34fb)
+			UUID: A/V Remote Control        (0000110e-0000-1000-8000-00805f9b34fb)
+			UUID: Headset AG                (00001112-0000-1000-8000-00805f9b34fb)
+			UUID: NAP                       (00001116-0000-1000-8000-00805f9b34fb)
+			UUID: Handsfree Audio Gateway   (0000111f-0000-1000-8000-00805f9b34fb)
+			UUID: Phonebook Access Server   (0000112f-0000-1000-8000-00805f9b34fb)
+			UUID: Message Access Server     (00001132-0000-1000-8000-00805f9b34fb)
+			UUID: PnP Information           (00001200-0000-1000-8000-00805f9b34fb)
+			UUID: Generic Access Profile    (00001800-0000-1000-8000-00805f9b34fb)
+			UUID: Generic Attribute Profile (00001801-0000-1000-8000-00805f9b34fb)
+			Modalias: usb:v000Ap0000d0000
+
+
+* Now play a song on the phone and listen to it on RockPiE (Bluetooth).
+
+Enjoy the Music
 
 ## Networking (Wifi / Eth0 / Eth1)
 
