@@ -6,6 +6,7 @@ This model has a micro HDMI for debugging purpose, but would be nice to have it 
 Releases:
 
 * [v1.0 - Kernel 5.9.0 RC2](#installing-ubuntu-2004-lts-on-emmc-instructions)
+* [v1.2 - Kernel 5.9.0 RC5](#kernel-590-rc5)
 * [u-boot - mainline](#u-boot)
 * Ubuntu 20.04 LTS
 
@@ -145,6 +146,24 @@ Testing mainline **kernel 5.9.0-rc1**, current status:
 			HCI Version: 4.2 (0x8)  Revision: 0x826c
 			LMP Version: 4.2 (0x8)  Subversion: 0xa99e
 			Manufacturer: Realtek Semiconductor Corporation (93)
+
+## Kernel 5.9.0-rc5
+
+Kernel 5.9.0-rc2 is rock solid in RockPi E, building **Kernel 5.9.0-rc5** with gcc-10 on eMMC for testing new devfreq and checking stability.
+As usual, stressing the board using Wifi and lots of R/W operations in eMMC requires a real-time monitoring tool, especially if Cpu Throttling Temperature isn't working nicely.
+
+**WiP**
+
+CPU Temp on the build process:
+
+![Kernel build](https://github.com/avafinger/rockpie-rk3328/raw/master/cuild.png)
+
+
+CPU Temp linmits:
+
+![Limits](https://github.com/avafinger/rockpie-rk3328/raw/master/kernel.png)
+
+
 
 ## Bluetooth for audio streaming with RockPi E
 
